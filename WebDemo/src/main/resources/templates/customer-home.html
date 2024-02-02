@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="ISO-8859-1">
+<title>CUSTOMER-HOME</title>
+<style>
+.pagination {
+	display: inline-block;
+}
+
+.pagination a {
+	color: black;
+	float: left;
+	padding: 8px 16px;
+	text-decoration: none;
+}
+
+.my_picture {
+	height: 140px;
+	width: 160px;
+	object-fit: cover;
+	border-radius: 80%;
+	border: 1px solid black;
+	display: inline;
+}
+</style>
+</head>
+<body>
+	<br>
+	<br>
+	<div align="center">
+	<h2>CRM</h2>
+		<table border="1" style="width: 45%">
+			<tr>
+				<th>ID</th>
+				<th>NAME</th>
+				<th>EMAIL</th>
+				<th>AGE</th>
+				<th>IMAGE</th>
+				<th>ACTION</th>
+			</tr>
+			<tr th:each="cust: ${customers}">
+				<td align="center" th:text="${cust.id}"></td>
+				<td align="center" th:text="${cust.name}"></td>
+				<td align="center" th:text="${cust.email}"></td>
+				<td align="center" th:text="${cust.age}"></td>
+				<td align="center"><img alt="NO IMAGE"
+					th:src="${cust.imagePath}" class="my_picture"></td>
+				<td align="center" ><a
+					th:href="@{/customer/update-customer(id=${cust.id})}">Update</a> <a
+					th:href="@{/customer/delete-customer}+ '/' + ${cust.id}"
+					onclick="confirm('Are you sure !!! ')">Delete</a></td>
+			</tr>
+		</table>
+		<br>
+		<div class="pagination">
+			<span th:each="pageNumber: ${pageNumbers}"><a
+				th:href="@{/customer/home(pageNumber=${pageNumber})}"
+				th:text="${pageNumber}"></a></span>
+		</div>
+		<br> <br>
+		<form th:action="@{/customer/search-by-email}">
+			<label>Enter Email here:</label> <input type="email"
+				name="searchEmail"> <input type="submit">
+		</form>
+		<br> <br>
+		<form th:action="@{/customer/search-by-name}">
+			<label>Enter Name here:</label> <input type="name" name="searchName">
+			<input type="submit">
+		</form>
+		<br> <br> <a th:href="@{/customer/add-customer}">ADD NEW
+			CUSTOMER</a>
+	</div>
+
+</body>
+</html>

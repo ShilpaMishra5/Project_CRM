@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>CUSTOMER_FORM</title>
+<style>
+.my_picture {
+	height: 140px;
+	width: 140px;
+	object-fit: cover;
+	border-radius: 50%;
+	border: 1px solid black;
+}
+</style>
+</head>
+<body>
+	<br>
+	<br>
+	<div align="center">
+		<h1 style="color: red">CUSTOMER-FORM</h1>
+		<form th:action="@{/customer/submit-form}" th:object="${customer}"
+			encType=multipart/form-data method="post">
+			<table>
+				<tr>
+					<td><label>Enter Customer ID :</label></td>
+					<td><input type="number" th:field="*{id}"></td>
+				</tr>
+				<tr>
+					<td><label>Enter Customer NAME :</label></td>
+					<td><input type="text" th:field="*{name}"></td>
+				</tr>
+				<tr>
+					<td><label>Enter Customer EMAIL :</label></td>
+					<td><input type="text" th:field="*{email}">
+						<p th:errors="*{email}" style="color: red"></p></td>
+
+				</tr>
+				<tr>
+					<td><label>Enter Customer AGE :</label></td>
+					<td><input type="number" th:field="*{age}">
+						<p th:errors="*{age}" style="color: red"></p></td>
+				</tr>
+				<tr>
+					<td><label>Enter Customer IMAGE :</label></td>
+					<td><input type="file" th:field="*{file}"></td>
+
+				</tr>
+			</table>
+			<br> <br> <input type="submit">
+		</form>
+	</div>
+
+</body>
+</html>
